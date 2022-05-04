@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		E7397D762821769E00C39A42 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7397D752821769E00C39A42 /* Item.swift */; };
+		E777DB3A28223EAB004A2E39 /* Silk_kv.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = E777DB3928223EAB004A2E39 /* Silk_kv.xcframework */; };
 		E7920145282172D400993456 /* SilkApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7920144282172D400993456 /* SilkApp.swift */; };
 		E7920147282172D400993456 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7920146282172D400993456 /* ContentView.swift */; };
 		E7920149282172D500993456 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E7920148282172D500993456 /* Assets.xcassets */; };
@@ -15,7 +16,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		E70234BB28219454000E5EF3 /* Silk-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Silk-Bridging-Header.h"; sourceTree = "<group>"; };
 		E7397D752821769E00C39A42 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
+		E777DB3928223EAB004A2E39 /* Silk_kv.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = Silk_kv.xcframework; path = ../silk_kv/Silk_kv.xcframework; sourceTree = "<group>"; };
 		E7920141282172D400993456 /* Silk.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Silk.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E7920144282172D400993456 /* SilkApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SilkApp.swift; sourceTree = "<group>"; };
 		E7920146282172D400993456 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -29,17 +32,28 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E777DB3A28223EAB004A2E39 /* Silk_kv.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		E70234B6282193BA000E5EF3 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				E777DB3928223EAB004A2E39 /* Silk_kv.xcframework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		E7920138282172D400993456 = {
 			isa = PBXGroup;
 			children = (
+				E70234BB28219454000E5EF3 /* Silk-Bridging-Header.h */,
 				E7920143282172D400993456 /* Silk */,
 				E7920142282172D400993456 /* Products */,
+				E70234B6282193BA000E5EF3 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -273,10 +287,12 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = NO;
 				DEVELOPMENT_ASSET_PATHS = "\"Silk/Preview Content\"";
 				DEVELOPMENT_TEAM = 7PVN97K9R8;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
+				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/../";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -287,6 +303,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = marksteve.com.Silk;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "Silk-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
@@ -300,10 +317,12 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = NO;
 				DEVELOPMENT_ASSET_PATHS = "\"Silk/Preview Content\"";
 				DEVELOPMENT_TEAM = 7PVN97K9R8;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
+				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/../";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -314,6 +333,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = marksteve.com.Silk;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "Silk-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
