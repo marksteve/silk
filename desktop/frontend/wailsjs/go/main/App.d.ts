@@ -5,3 +5,5 @@ import {store} from '../models';
 export function GetDbOptions():Promise<number>;
 
 export function GetFibers():Promise<Array<store.Fiber>|Error>;
+
+export function Weave(arg1:Array<number>):Promise<Error>;

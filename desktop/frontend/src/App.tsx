@@ -5,6 +5,7 @@ import {
   useEffect,
   useReducer,
 } from 'react'
+import { format } from 'timeago.js'
 import * as silk from '../wailsjs/go/main/App'
 
 interface Fiber {
@@ -34,7 +35,7 @@ function App() {
     setStatus('Syncing...')
     silk
       .GetFibers()
-      .then(setFibers)
+      .then((resp) => setFibers(resp ?? []))
       .catch(setError)
       .then(() => setStatus(`Last synced on ${new Date()}`))
   }, [setFibers])
@@ -46,19 +47,30 @@ function App() {
       setStatus('Connected.')
       fetchFibers()
     })
-    // @ts-ignore
-    return () => window.runtime.EventsOff('startup')
+    window.addEventListener('paste', (e: any) => {
+      setStatus('Pasting...')
+      const data = btoa(e.clipboardData.getData('text'))
+      // @ts-ignore
+      silk.Weave(data).then(fetchFibers)
+    })
+    return () => {
+      // @ts-ignore
+      window.runtime.EventsOff('startup')
+    }
   }, [])
 
   return (
     <div className="relative flex h-screen w-screen flex-col overflow-x-hidden">
-      <ul className="flex flex-grow flex-col">
+      <ul className="overflow-y-auto" style={{ height: 'calc(100vh - 3rem)' }}>
         {fibers.map((fiber) => (
           <li
             key={fiber.ts}
-            className="group flex justify-between border-b p-5"
+            className="group flex max-h-32 items-start justify-between overflow-hidden border-b p-5 hover:bg-stone-50"
           >
-            {renderData(fiber.data)}
+            <div className="flex w-11/12 flex-col">
+              <div className="text-xs text-stone-500">{format(fiber.ts)}</div>
+              {renderData(fiber.data)}
+            </div>
             <Button
               className="invisible group-hover:visible"
               onClick={() => copyToClipboard(fiber)}
@@ -68,8 +80,8 @@ function App() {
           </li>
         ))}
       </ul>
-      <div className="fixed inset-x-0 bottom-0 flex h-12 items-center justify-between gap-x-5 bg-stone-50 px-5 shadow-inner">
-        <div className="flex-grow text-xs">{status}</div>
+      <div className="flex h-12 items-center justify-between gap-x-5 bg-stone-50 px-5 shadow-inner">
+        <div className="w-11/12 text-xs text-stone-500">{status}</div>
         <Button onClick={fetchFibers}>Sync</Button>
       </div>
       {error ? (
@@ -90,7 +102,7 @@ function checkError<T>(state: T, action: T | Error) {
 }
 
 function renderData(data: string) {
-  return atob(data)
+  return <div className="whitespace-pre">{atob(data)}</div>
 }
 
 function copyToClipboard(fiber: Fiber) {

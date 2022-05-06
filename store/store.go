@@ -1,6 +1,8 @@
 package store
 
 import (
+	"time"
+
 	"github.com/charmbracelet/charm/client"
 	"github.com/charmbracelet/charm/kv"
 	"github.com/dgraph-io/badger/v3"
@@ -33,7 +35,7 @@ func (s *Store) Close() error {
 	return s.db.Close()
 }
 
-func (s *Store) GetFibers(name string) ([]Fiber, error) {
+func (s *Store) GetFibers() ([]Fiber, error) {
 	err := s.db.Sync()
 	if err != nil {
 		return nil, err
@@ -67,6 +69,11 @@ func (s *Store) GetFibers(name string) ([]Fiber, error) {
 	return fibers, nil
 }
 
-func (s *Store) GetDbOptions(name string) badger.Options {
+func (s *Store) Weave(data []byte) error {
+	ts := time.Now().Format(time.RFC3339)
+	return s.db.Set([]byte(ts), data)
+}
+
+func (s *Store) GetDbOptions() badger.Options {
 	return s.db.DB.Opts()
 }

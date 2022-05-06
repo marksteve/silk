@@ -17,13 +17,15 @@ func NewApp() *App {
 
 func (a *App) startup(ctx context.Context) {
 	a.ctx = ctx
-	s, err := store.NewStore("silk")
+
+	s, err := store.NewStore("silk-RJoboAy9")
 	if err != nil {
-		panic(err)
+		runtime.LogFatalf(ctx, "Failed to open: %s", err)
 	}
 	a.ctx = context.WithValue(ctx, "store", s)
-	runtime.LogInfo(ctx, "Store initialized")
+
 	runtime.EventsEmit(ctx, "startup")
+	runtime.LogInfo(ctx, "Store initialized")
 }
 
 func (a *App) shutdown(ctx context.Context) {
@@ -33,10 +35,15 @@ func (a *App) shutdown(ctx context.Context) {
 
 func (a *App) GetFibers() ([]store.Fiber, error) {
 	s := a.ctx.Value("store").(*store.Store)
-	return s.GetFibers("silk")
+	return s.GetFibers()
+}
+
+func (a *App) Weave(data []byte) error {
+	s := a.ctx.Value("store").(*store.Store)
+	return s.Weave(data)
 }
 
 func (a *App) GetDbOptions() interface{} {
 	s := a.ctx.Value("store").(*store.Store)
-	return s.GetDbOptions("silk")
+	return s.GetDbOptions()
 }

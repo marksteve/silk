@@ -9,3 +9,7 @@ export function GetDbOptions() {
 export function GetFibers() {
   return window['go']['main']['App']['GetFibers']();
 }
+
+export function Weave(arg1) {
+  return window['go']['main']['App']['Weave'](arg1);
+}
