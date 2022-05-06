@@ -29,6 +29,10 @@ func (s *Store) Link(code string) error {
 	return nil
 }
 
+func (s *Store) Close() error {
+	return s.db.Close()
+}
+
 func (s *Store) GetFibers(name string) ([]Fiber, error) {
 	err := s.db.Sync()
 	if err != nil {

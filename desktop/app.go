@@ -26,6 +26,11 @@ func (a *App) startup(ctx context.Context) {
 	runtime.EventsEmit(ctx, "startup")
 }
 
+func (a *App) shutdown(ctx context.Context) {
+	s := a.ctx.Value("store").(*store.Store)
+	s.Close()
+}
+
 func (a *App) GetFibers() ([]store.Fiber, error) {
 	s := a.ctx.Value("store").(*store.Store)
 	return s.GetFibers("silk")
