@@ -1,0 +1,12 @@
+{
+  "name": "silk-desktop",
+  "outputfilename": "silk",
+  "frontend:install": "npm install",
+  "frontend:build": "npm run build",
+  "frontend:dev:watcher": "npm run dev",
+  "frontend:dev:serverUrl": "http://localhost:3000",
+  "author": {
+    "name": "Mark Steve Samson",
+    "email": "hello@marksteve.com"
+  }
+}
