@@ -5,6 +5,7 @@ go 1.17
 require (
 	github.com/charmbracelet/charm v0.12.0
 	github.com/dgraph-io/badger/v3 v3.2011.1
+	github.com/gabriel-vasile/mimetype v1.4.0
 )
 
 require (

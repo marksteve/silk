@@ -22,7 +22,7 @@ func (a *App) startup(ctx context.Context) {
 		panic(err)
 	}
 	a.ctx = context.WithValue(ctx, "store", s)
-	runtime.LogInfo(ctx, "Store loaded")
+	runtime.LogInfo(ctx, "Store initialized")
 	runtime.EventsEmit(ctx, "startup")
 }
 
