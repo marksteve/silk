@@ -1,8 +1,11 @@
-module github.com/marksteve/silk/kv
+module github.com/marksteve/silk/store
 
 go 1.17
 
-require github.com/charmbracelet/charm v0.12.0
+require (
+	github.com/charmbracelet/charm v0.12.0
+	github.com/dgraph-io/badger/v3 v3.2011.1
+)
 
 require (
 	github.com/DataDog/zstd v1.4.1 // indirect
@@ -15,7 +18,6 @@ require (
 	github.com/charmbracelet/keygen v0.3.0 // indirect
 	github.com/charmbracelet/lipgloss v0.5.0 // indirect
 	github.com/containerd/console v1.0.3 // indirect
-	github.com/dgraph-io/badger/v3 v3.2011.1 // indirect
 	github.com/dgraph-io/ristretto v0.0.4-0.20210122082011-bb5d392ed82d // indirect
 	github.com/dustin/go-humanize v1.0.0 // indirect
 	github.com/golang-jwt/jwt/v4 v4.2.0 // indirect

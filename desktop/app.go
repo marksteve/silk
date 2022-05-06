@@ -2,26 +2,36 @@ package main
 
 import (
 	"context"
-	"fmt"
+
+	"github.com/marksteve/silk/store"
+	"github.com/wailsapp/wails/v2/pkg/runtime"
 )
 
-// App struct
 type App struct {
 	ctx context.Context
 }
 
-// NewApp creates a new App application struct
 func NewApp() *App {
 	return &App{}
 }
 
-// startup is called when the app starts. The context is saved
-// so we can call the runtime methods
 func (a *App) startup(ctx context.Context) {
 	a.ctx = ctx
+	s, err := store.NewStore("silk")
+	if err != nil {
+		panic(err)
+	}
+	a.ctx = context.WithValue(ctx, "store", s)
+	runtime.LogInfo(ctx, "Store loaded")
+	runtime.EventsEmit(ctx, "startup")
 }
 
-// Greet returns a greeting for the given name
-func (a *App) Greet(name string) string {
-	return fmt.Sprintf("Hello %s, It's show time!", name)
+func (a *App) GetFibers() ([]store.Fiber, error) {
+	s := a.ctx.Value("store").(*store.Store)
+	return s.GetFibers("silk")
+}
+
+func (a *App) GetDbOptions() interface{} {
+	s := a.ctx.Value("store").(*store.Store)
+	return s.GetDbOptions("silk")
 }
